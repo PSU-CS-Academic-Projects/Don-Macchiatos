@@ -114,15 +114,17 @@ Go to **Menu Items** → click each drink → upload the correct photo from `sta
 
 ## Screenshots
 
-**Login Page**
+**Home Page**
 
 ![Home Page](screenshots/home.png)
+![Home Page](screenshots/homepage.png)
 
-**Dashboard**
+**Menu Page**
 
+![Menu Page](screenshots/menu.png)
 ![Menu Page](screenshots/menus2.png)
 
-**Main Features**
+**Cart**
 
 ![Cart Page](screenshots/cart.png)
 
