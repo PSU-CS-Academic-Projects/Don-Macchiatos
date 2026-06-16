@@ -1,0 +1,32 @@
+{% extends "shop/base.html" %}
+
+{% block title %}Order Confirmed! — Don Macchiatos{% endblock %}
+
+{% block content %}
+<section class="section" style="text-align: center; padding: 8rem 1rem;">
+    <div class="container" style="max-width: 600px; margin: 0 auto;">
+        <div style="font-size: 4rem; margin-bottom: 1.5rem;">☕</div>
+        <h1 style="font-family: var(--font-heading); font-size: 2.5rem; margin-bottom: 1rem;">
+            Order Confirmed!
+        </h1>
+        <p style="color: var(--color-muted); margin-bottom: 0.5rem;">
+            Thank you, <strong>{{ order.customer_name }}</strong>!
+        </p>
+        <p style="color: var(--color-muted); margin-bottom: 2rem;">
+            Your order #{{ order.pk }} has been received.
+            {% if order.delivery_method == 'pickup' %}
+                We'll have it ready for pickup soon.
+            {% else %}
+                We'll deliver it to you shortly.
+            {% endif %}
+        </p>
+        <div class="order-details-box">
+            <p><strong>Order Total:</strong> ₱{{ order.total_price }}</p>
+            <p><strong>Method:</strong> {{ order.get_delivery_method_display }}</p>
+        </div>
+        <a href="{% url 'menu' %}" class="btn btn--primary" style="margin-top: 2rem;">
+            Order Again
+        </a>
+    </div>
+</section>
+{% endblock %}

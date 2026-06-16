@@ -1,0 +1,205 @@
+{% extends "shop/base.html" %}
+{% load static %}
+
+{% block title %}Your Cart — Don Macchiatos{% endblock %}
+
+{% block content %}
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- PAGE HEADER                                    -->
+<!-- ═══════════════════════════════════════════════ -->
+<section class="cart-header">
+    <div class="container">
+        <p class="section__eyebrow">Ready to order?</p>
+        <h1 class="cart-header__title">Your Cart</h1>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- CART CONTENT                                   -->
+<!-- ═══════════════════════════════════════════════ -->
+<section class="section cart-section">
+    <div class="container">
+        {% if cart_items %}
+        <div class="cart-layout">
+
+            <!-- LEFT: Cart Items List -->
+            <div class="cart-items-column">
+                <h2 class="cart-items__title">Order Items</h2>
+                <div class="cart-items-list">
+                    {% for cart_item in cart_items %}
+                    <div class="cart-item" id="cart-item-{{ cart_item.item.pk }}">
+                        
+                        <!-- Item Image -->
+                        <div class="cart-item__image-wrap">
+                            {% if cart_item.item.image %}
+                                <img src="{{ cart_item.item.image.url }}" alt="{{ cart_item.item.name }}" class="cart-item__image">
+                            {% else %}
+                                <div class="cart-item__image-placeholder">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <path d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8zM6 1v3M10 1v3M14 1v3"/>
+                                    </svg>
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Item Details -->
+                        <div class="cart-item__content">
+                            <h3 class="cart-item__name">{{ cart_item.item.name }}</h3>
+                            <p class="cart-item__price">₱39 each</p>
+
+                            <!-- Coffee Option (Not for Caramel) -->
+                            {% if 'caramel' not in cart_item.item.name|lower %}
+                            <div class="cart-item__coffee-option">
+                                <button class="coffee-toggle coffee-toggle--with" 
+                                    data-item-id="{{ cart_item.item.pk }}"
+                                    data-coffee="yes"
+                                    title="With Coffee">
+                                    With Coffee
+                                </button>
+                                <button class="coffee-toggle coffee-toggle--without" 
+                                    data-item-id="{{ cart_item.item.pk }}"
+                                    data-coffee="no"
+                                    title="Without Coffee">
+                                    Without Coffee
+                                </button>
+                            </div>
+                            {% else %}
+                            <p class="cart-item__note">✓ With Coffee</p>
+                            {% endif %}
+                        </div>
+
+                        <!-- Quantity Controls -->
+                        <div class="cart-item__quantity">
+                            <button class="qty-btn qty-btn--minus"
+                                data-item-id="{{ cart_item.item.pk }}"
+                                data-action="decrease"
+                                aria-label="Decrease quantity">−</button>
+                            <span class="qty-display" id="qty-{{ cart_item.item.pk }}">{{ cart_item.quantity }}</span>
+                            <button class="qty-btn qty-btn--plus"
+                                data-item-id="{{ cart_item.item.pk }}"
+                                data-action="increase"
+                                aria-label="Increase quantity">+</button>
+                        </div>
+
+                        <!-- Subtotal -->
+                        <div class="cart-item__subtotal">
+                            <span id="subtotal-{{ cart_item.item.pk }}">₱{{ cart_item.subtotal }}</span>
+                        </div>
+
+                        <!-- Remove Button -->
+                        <button class="cart-item__remove"
+                            data-item-id="{{ cart_item.item.pk }}"
+                            aria-label="Remove {{ cart_item.item.name }} from cart">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <line x1="18" y1="6" x2="6" y2="18"/>
+                                <line x1="6" y1="6" x2="18" y2="18"/>
+                            </svg>
+                        </button>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- RIGHT: Order Summary -->
+            <div class="cart-summary">
+                <div class="cart-summary__sticky">
+                    <h2 class="cart-summary__title">Order Summary</h2>
+
+                    <!-- Summary Lines -->
+                    <div class="cart-summary__items">
+                        {% for cart_item in cart_items %}
+                        <div class="cart-summary__item">
+                            <span class="cart-summary__item-name">{{ cart_item.item.name }} × {{ cart_item.quantity }}</span>
+                            <span class="cart-summary__item-price" id="summary-subtotal-{{ cart_item.item.pk }}">₱{{ cart_item.subtotal }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <!-- Divider -->
+                    <div class="cart-summary__divider"></div>
+
+                    <!-- Total -->
+                    <div class="cart-summary__total">
+                        <span class="cart-summary__total-label">Total</span>
+                        <span class="cart-summary__total-amount" id="cart-total">₱{{ total }}</span>
+                    </div>
+
+                    <!-- Checkout Button -->
+                    <a href="{% url 'checkout' %}" class="btn btn--primary btn--full cart-summary__checkout">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin-right: 0.5rem;">
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                        </svg>
+                        Proceed to Checkout
+                    </a>
+
+                    <!-- Continue Shopping -->
+                    <a href="{% url 'menu' %}" class="btn btn--secondary btn--full" style="margin-top: 1rem;">
+                        ← Continue Shopping
+                    </a>
+                </div>
+            </div>
+
+        </div>
+        {% else %}
+
+        <!-- EMPTY CART STATE -->
+        <div class="cart-empty">
+            <div class="cart-empty__icon">
+                <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                    <circle cx="9" cy="21" r="1"/>
+                    <circle cx="20" cy="21" r="1"/>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                </svg>
+            </div>
+            <h2 class="cart-empty__title">Your cart is empty</h2>
+            <p class="cart-empty__message">Looks like you haven't added anything yet. Browse our menu to get started.</p>
+            <a href="{% url 'menu' %}" class="btn btn--primary" style="margin-top: 2rem;">
+                Browse the Menu
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Coffee option toggle functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const coffeeToggles = document.querySelectorAll('.coffee-toggle');
+    
+    // Initialize coffee option (default to "With Coffee")
+    coffeeToggles.forEach(btn => {
+        const itemId = btn.dataset.itemId;
+        const coffee = btn.dataset.coffee;
+        
+        // Set default to "with coffee" on page load
+        if (coffee === 'yes') {
+            btn.classList.add('active');
+        }
+    });
+    
+    // Handle toggle clicks
+    coffeeToggles.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const itemId = this.dataset.itemId;
+            const coffee = this.dataset.coffee;
+            
+            // Remove active from all buttons for this item
+            document.querySelectorAll(`.coffee-toggle[data-item-id="${itemId}"]`).forEach(b => {
+                b.classList.remove('active');
+            });
+            
+            // Add active to clicked button
+            this.classList.add('active');
+            
+            // You can add AJAX here to save the preference to the server if needed
+            console.log(`Item ${itemId}: Coffee option set to ${coffee === 'yes' ? 'With Coffee' : 'Without Coffee'}`);
+        });
+    });
+});
+</script>
+{% endblock %}

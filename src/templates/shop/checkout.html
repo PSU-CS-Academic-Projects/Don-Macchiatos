@@ -1,0 +1,143 @@
+{% extends "shop/base.html" %}
+{% load static %}
+
+{% block title %}Checkout — Don Macchiatos{% endblock %}
+
+{% block content %}
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- PAGE HEADER                                    -->
+<!-- ═══════════════════════════════════════════════ -->
+<section class="checkout-header">
+    <div class="container">
+        <p class="section__eyebrow">Almost there</p>
+        <h1 class="checkout-header__title">Checkout</h1>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- CHECKOUT CONTENT                               -->
+<!-- ═══════════════════════════════════════════════ -->
+<section class="section checkout-section">
+    <div class="container">
+        <div class="checkout-layout">
+
+            <!-- LEFT: Order Form -->
+            <div class="checkout-form-column">
+                <h2 class="checkout-form__title">Your Details</h2>
+
+                <form action="" method="post" id="checkout-form" class="checkout-form">
+                    {% csrf_token %}
+
+                    <!-- Name Field -->
+                    <div class="form-field">
+                        <label for="customer_name" class="form-label">Full Name *</label>
+                        <input type="text" id="customer_name" name="customer_name"
+                            class="form-input"
+                            placeholder=" "
+                            required>
+                    </div>
+
+                    <!-- Contact Number Field -->
+                    <div class="form-field">
+                        <label for="contact_number" class="form-label">Contact Number *</label>
+                        <input type="tel" id="contact_number" name="contact_number"
+                            class="form-input"
+                            placeholder=" "
+                            required>
+                    </div>
+
+                    <!-- Delivery Method -->
+                    <div class="form-field">
+                        <label class="form-label">Delivery Method *</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="delivery_method" value="pickup" checked>
+                                <span class="radio-custom"></span>
+                                <span>Pickup at Store</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="delivery_method" value="delivery">
+                                <span class="radio-custom"></span>
+                                <span>Delivery to Address</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Address Field (Hidden by default) -->
+                    <div class="form-field" id="address-group" style="display:none;">
+                        <label for="address" class="form-label">Delivery Address *</label>
+                        <textarea id="address" name="address" 
+                            class="form-input form-textarea"
+                            rows="4"
+                            placeholder=" "></textarea>
+                    </div>
+
+                </form>
+            </div>
+
+            <!-- RIGHT: Order Summary -->
+            <div class="checkout-summary">
+                <div class="checkout-summary__sticky">
+                    <h2 class="checkout-summary__title">Order Summary</h2>
+
+                    <!-- Order Items -->
+                    <div class="checkout-summary__items">
+                        {% for cart_item in cart_items %}
+                        <div class="checkout-summary__item">
+                            <span class="checkout-summary__item-name">{{ cart_item.item.name }} × {{ cart_item.quantity }}</span>
+                            <span class="checkout-summary__item-price">₱{{ cart_item.subtotal }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <!-- Divider -->
+                    <div class="checkout-summary__divider"></div>
+
+                    <!-- Total -->
+                    <div class="checkout-summary__total">
+                        <span class="checkout-summary__total-label">Total Amount</span>
+                        <span class="checkout-summary__total-amount">₱{{ total }}</span>
+                    </div>
+
+                    <!-- Info Box -->
+                    <div class="checkout-info-box">
+                        <p><strong>Payment:</strong> Pay upon pickup/delivery</p>
+                        <p><strong>Estimated Time:</strong> 15-20 minutes</p>
+                    </div>
+
+                    <!-- Place Order Button -->
+                    <button type="submit" form="checkout-form" class="btn btn--primary btn--full checkout-submit">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin-right: 0.5rem;">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                        Place Order
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Show/hide the address field based on delivery method selection
+document.querySelectorAll('input[name="delivery_method"]').forEach(radio => {
+    radio.addEventListener('change', function() {
+        const addressGroup = document.getElementById('address-group');
+        const addressInput = document.getElementById('address');
+        
+        if (this.value === 'delivery') {
+            addressGroup.style.display = 'block';
+            addressInput.required = true;
+        } else {
+            addressGroup.style.display = 'none';
+            addressInput.required = false;
+        }
+    });
+});
+</script>
+{% endblock %}

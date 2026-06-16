@@ -1,0 +1,153 @@
+{% extends "shop/base.html" %}
+{% load static %}
+
+{% block title %}Contact Don Macchiatos — Get in Touch{% endblock %}
+
+{% block content %}
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- PAGE HEADER                                    -->
+<!-- ═══════════════════════════════════════════════ -->
+<section class="contact-header">
+    <div class="container">
+        <p class="section__eyebrow">Get in Touch</p>
+        <h1 class="contact-header__title">Contact Us</h1>
+        <div class="contact-header__line"></div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- CONTACT SECTION                                -->
+<!-- ═══════════════════════════════════════════════ -->
+<section class="section contact-section">
+    <div class="container">
+        <div class="contact-grid">
+
+            <!-- LEFT COLUMN — Contact Information -->
+            <div class="contact-column contact-info">
+
+                <!-- Location Card -->
+                <div class="contact-card contact-animate slide-left">
+                    <p class="contact-card__label">Find Us</p>
+                    <div class="contact-card__content">
+                        <p>Brgy. Tiniguiban, Puerto Princesa City</p>
+                        <p>Palawan, Philippines</p>
+                        <p>In front of Caltex Tiniguiban</p>
+                    </div>
+                </div>
+
+                <!-- Hours Card -->
+                <div class="contact-card contact-animate slide-left">
+                    <p class="contact-card__label">We're Open</p>
+                    <div class="contact-card__content">
+                        <p><strong>Monday – Friday:</strong> 10:00 AM – 10:00 PM</p>
+                    </div>
+                </div>
+
+                <!-- Social Card -->
+                <div class="contact-card contact-animate slide-left">
+                    <p class="contact-card__label">Connect With Us</p>
+                    <a href="https://www.facebook.com/donmacchiatosphilippines" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       class="facebook-link">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12.07h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12.07h2.773l-.443 2.89h-2.33v6.988C20.343 21.128 24 16.991 24 12.073z"/>
+                        </svg>
+                        <span>Don Macchiatos Philippines</span>
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- RIGHT COLUMN — Contact Form -->
+            <div class="contact-column contact-form-wrapper contact-animate slide-right">
+                <h2 class="contact-form__title">Send a Message</h2>
+                <p class="contact-form__subtitle">We'd love to hear from you.</p>
+
+                <form method="POST" class="contact-form">
+                    {% csrf_token %}
+
+                    <!-- Name Field -->
+                    <div class="form-field">
+                        <label for="name" class="form-label">Your Name</label>
+                        <input 
+                            type="text" 
+                            id="name" 
+                            name="name" 
+                            class="form-input"
+                            required
+                            placeholder=" ">
+                    </div>
+
+                    <!-- Email Field -->
+                    <div class="form-field">
+                        <label for="email" class="form-label">Email Address</label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            class="form-input"
+                            required
+                            placeholder=" ">
+                    </div>
+
+                    <!-- Message Field -->
+                    <div class="form-field">
+                        <label for="message" class="form-label">Message</label>
+                        <textarea 
+                            id="message" 
+                            name="message" 
+                            class="form-input form-textarea"
+                            rows="6"
+                            required
+                            placeholder=" "></textarea>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="contact-submit">Send Message</button>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- BOTTOM DECORATIVE STRIP                        -->
+<!-- ═══════════════════════════════════════════════ -->
+<section class="contact-strip">
+    <div class="contact-strip__overlay"></div>
+    <p class="contact-strip__text">Visit us in Palawan</p>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Initialize contact form animations
+document.addEventListener('DOMContentLoaded', function() {
+    const animateElements = document.querySelectorAll('.contact-animate');
+    
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'none';
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    animateElements.forEach(el => {
+        observer.observe(el);
+    });
+});
+</script>
+{% endblock %}
