@@ -54,7 +54,7 @@ Don Macchiatos is a fully functional coffee shop website built for a real local 
 
 **1. Clone the repository**
 ```bash
-git clone https://github.com/202380269/Don-Mac.git
+git clone [https://github.com/202380269/Don-Mac.git](https://github.com/PSU-CS-Academic-Projects/Don-Macchiatos.git)
 ```
 
 **2. Navigate into the project folder**
