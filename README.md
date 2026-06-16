@@ -7,12 +7,9 @@
 | **Project Category** | Web Development |
 | **Instructor** | Divine Caabay |
 
-## Members
-
-| Full Name |
-|-----------|
-| Kimly Mark Bron |
-| Mark Aaron Figueroa |
+### Members
+* Kimly Mark Bron
+* Mark Aaron Figueroa
 
 ---
 
