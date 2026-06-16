@@ -5,7 +5,7 @@
 | **Subject** | Web Systems and Technologies |
 | **Academic Year** | 2025-2026 |
 | **Project Category** | Web Development |
-| **Instructor** | (Add your instructor's name here) |
+| **Instructor** | Divine Caabay |
 
 ## Members
 
