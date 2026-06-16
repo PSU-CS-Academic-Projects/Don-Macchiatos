@@ -1,259 +1,157 @@
-# Project Title
-
-> Replace this line with a one sentence description of your project.
-
----
-
-# How to Submit Your Project
-
-Follow these steps carefully before filling out the sections below.
-
----
-
-## Step 1 — Use This Template
-
-1. Click the **"Use this template"** button at the top of this repository
-2. Click **"Create a new repository"**
-3. Under **Owner** make sure to select **PSU-CS-Academic-Projects** and not your personal account
-
-> If you do not see PSU-CS-Academic-Projects in the owner dropdown, you have not been added as a member yet. Contact the organization owner.
-
-4. Name your repository following this format:
-
-**Good Examples**
-* Student-Attendance-System
-* Library-Management-System
-* Campus-Navigation-App
-* Online-Enrollment-System
-
-**Avoid**
-* project
-* system
-* thesis
-* finalproject
-* group1
-
-5. Set the repository to **Public**
-
-> It must be Public so it appears on the showcase website.
-
-6. Click **"Create repository from template"**
-
----
-
-## Step 2 — Set Up Your Repository
-
-After creating the repository:
-
-1. Go to your new repository page
-2. Click the **gear icon** next to the **About** section on the right side
-3. Fill in the **Description** field with a short one sentence description of your project
-4. Paste your **live demo URL** in the **Website** field if available
-5. Under **Topics** add the relevant topics for your project
-
-**Subject Topics — choose at least one:**
-* wst (web system and technology)
-* sia (system integration architecture)
-
-**Category Topics — choose one or more:**
-* web-development
-* mobile-development
-* desktop-application
-* ai
-* machine-learning
-* cybersecurity
-* game-development
-* iot
-* research-project
-
-**Technology Topics — choose all that apply:**
-* php
-* mysql
-* laravel
-* react
-* nextjs
-* flutter
-* firebase
-* java
-* python
-* csharp
-* unity
-* godot
-
-6. Click **Save changes**
-
----
-
-## Step 3 — Add Your Screenshots
-
-1. On your computer, open the project folder you just cloned or downloaded
-2. Place your screenshots inside the `screenshots/` folder
-3. Recommended screenshots to include:
-   * Login Page
-   * Dashboard
-   * Main Features
-   * Reports or Output Pages
-   * Mobile Interface (if applicable)
-4. Name your screenshots clearly:
-
-**Good Examples**
-* login.png
-* dashboard.png
-* features.png
-
-**Avoid**
-* image1.png
-* screenshot(1).png
-* untitled.png
-
----
-
-## Step 4 — Add Your Project Code
-
-Place all your project source code inside the `src/` folder.
-The structure inside `src/` will depend on your project type.
-
-If you are uploading manually through GitHub (no Git):
-
-1. Go to your repository page on GitHub
-2. Click **"Add file"** → **"Upload files"**
-3. Drag and drop your project files
-4. Scroll down and click **"Commit changes"**
-
-If you are using Git:
-
-1. Clone the repository
-
-```bash
-git clone https://github.com/PSU-CS-Academic-Projects/your-repo-name.git
-```
-
-2. Copy your project files into the cloned folder
-3. Stage and commit your files
-
-```bash
-git add .
-git commit -m "Initial project upload"
-git push origin main
-```
-
----
-
-## Step 5 — Fill Out This README
-
-Delete everything above this line including the How to Submit section once you are done setting up.
-Then fill out all the sections below.
-
----
-
-# Project Title
-
-> One sentence description of your project.
-
----
+# Don Macchiatos — A premium coffee shop website for ordering drinks online.
 
 ## Project Information
 
-| Field | Details |
-|-------|---------|
-| Subject | e.g. Web Systems and Technologies |
-| Academic Year | e.g. 2025-2026 |
-| Project Category | e.g. Web Development |
-| Instructor | e.g. Prof. Juan Dela Cruz |
+| **Subject** | Web Systems and Technologies |
+| **Academic Year** | 2025-2026 |
+| **Project Category** | Web Development |
+| **Instructor** | (Add your instructor's name here) |
 
-### Members
+## Members
 
-* Full Name
-* Full Name
-* Full Name
+| Full Name |
+|-----------|
+| Kimly Mark Bron |
+| Mark Aaron Figueroa |
 
 ---
 
 ## Project Description
 
-Explain what your project is and what problem it solves.
-Who is it for? What was the goal of the project?
+Don Macchiatos is a fully functional coffee shop website built for a real local business based in Brgy. Tiniguiban, Puerto Princesa City, Palawan, Philippines. The website allows customers to browse the full drink menu, add items to a cart, and place pickup or delivery orders online. It was built to give Don Macchiatos a professional online presence and to provide customers with a convenient way to order their favorite drinks without visiting the shop in person. The goal of the project was to apply web development concepts — including backend logic, database management, and frontend design — in a real-world business context.
 
 ---
 
 ## Features
 
-* Feature one
-* Feature two
-* Feature three
+- Full drink menu with category filters (Coffee, Matcha, Fruit, Hot Drinks)
+- Session-based shopping cart with live AJAX updates — no page reload needed
+- Checkout form with pickup or delivery option
+- Auto-scrolling featured drinks carousel on the home page
+- Infinite community photo gallery showcasing real customers
+- Scroll animations — fade-in, slide-in, parallax, and stagger effects
+- Contact page with shop address, business hours, Facebook link, and message form
+- Django Admin panel for managing menu items, orders, and customer messages
+- Fully responsive design for mobile, tablet, and desktop
+- Order confirmation page after successful checkout
 
 ---
 
 ## Technologies Used
 
-* Technology one
-* Technology two
-* Technology three
+- Python
+- Django
+- SQLite
+- HTML5
+- CSS3
+- JavaScript (Vanilla)
+- Google Fonts (Playfair Display, Inter)
+- Pillow
 
 ---
 
 ## Installation Guide
 
-> Provide clear steps so anyone can run your project locally.
-
-1. Clone the repository
-
+**1. Clone the repository**
 ```bash
-git clone https://github.com/PSU-CS-Academic-Projects/your-repo-name.git
+git clone https://github.com/202380269/Don-Mac.git
 ```
 
-2. Navigate into the project folder
-
+**2. Navigate into the project folder**
 ```bash
-cd your-repo-name
+cd Don-Mac
 ```
 
-3. Add any additional steps specific to your project here
-   * Import the database
-   * Configure environment settings
-   * Install dependencies
-   * Run the application
+**3. Create and activate a virtual environment**
+```bash
+# Windows
+python -m venv venv
+venv\Scripts\activate
+
+# Mac/Linux
+python3 -m venv venv
+source venv/bin/activate
+```
+
+**4. Install dependencies**
+```bash
+pip install django pillow
+```
+
+**5. Apply database migrations**
+```bash
+python manage.py migrate
+```
+
+**6. Create an admin account**
+```bash
+python manage.py createsuperuser
+```
+
+**7. Seed the menu data**
+```bash
+python manage.py shell
+```
+Then paste the contents of `seed_menu.py` inside the shell and type `exit()`.
+
+**8. Run the application**
+```bash
+python manage.py runserver
+```
+
+**9. Open in your browser**
+```
+http://127.0.0.1:8000
+```
+
+**10. Upload drink photos via the admin panel**
+```
+http://127.0.0.1:8000/admin/
+```
+Go to **Menu Items** → click each drink → upload the correct photo from `static/images/`.
 
 ---
 
 ## Screenshots
 
-> Upload your screenshots inside the `screenshots/` folder and reference them here.
-
 **Login Page**
 
-![Login Page](screenshots/login.png)
+![Home Page](screenshots/home.png)
 
 **Dashboard**
 
-![Dashboard](screenshots/dashboard.png)
+![Menu Page](screenshots/menus2.png)
 
 **Main Features**
 
-![Features](screenshots/features.png)
+![Cart Page](screenshots/cart.png)
+
+**Contact**
+
+![Contact Page](screenshots/contact.png)
+
 
 ---
 
 ## Live Demo
 
-* Live URL: https://your-live-link-here.com
+Live URL: *(Not yet deployed)*
 
 ---
 
 ## Video Demonstration
 
-* Video Link: https://your-video-link-here.com (Optional)
+Video Link: *https://drive.google.com/drive/folders/1YWUndjpmKFblZyjYzsfREkPfewZF5rMx?usp=sharing*
 
 ---
 
 ## Future Improvements
 
-* Improvement one
-* Improvement two
-* Improvement three
-
----
-
-> Before submitting make sure you have completed the Repository Submission Checklist
-> in the Project Submission Guide.
-> [Project Submission Guide](https://github.com/PSU-CS-Academic-Projects/.github/blob/main/PROJECT_SUBMISSION_GUIDE.md)
+- User authentication so customers can log in and track their orders
+- Online payment integration (GCash, Maya, credit card)
+- Real-time order status notifications via SMS or email
+- Admin analytics dashboard showing sales per day and best-selling drinks
+- Customer reviews and ratings for each drink
+- Loyalty points and rewards system for repeat customers
+- Mobile app version using Flutter or React Native
+- Deployment to a live server for public access
